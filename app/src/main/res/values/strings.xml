@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">El Rosal</string>
+    <string name="el_rosal_logo">El Rosal Logo</string>
+    <string name="categories_label">Categories</string>
+</resources>

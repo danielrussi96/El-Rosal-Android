@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="deploymentTargetDropDown">
+    <value>
+      <entry key="CategoriesItemShimmerPreview">
+        <State />
+      </entry>
+      <entry key="HomeScreenPreview">
+        <State />
+      </entry>
+      <entry key="ProductDetailScreenPreview">
+        <State />
+      </entry>
+      <entry key="ProductsScreenPreview">
+        <State />
+      </entry>
+      <entry key="SubCategoriesContentPreview">
+        <State />
+      </entry>
+      <entry key="app">
+        <State />
+      </entry>
+    </value>
+  </component>
+</project>
