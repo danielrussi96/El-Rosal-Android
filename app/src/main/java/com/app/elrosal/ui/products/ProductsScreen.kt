@@ -1,5 +1,7 @@
 package com.app.elrosal.ui.products
 
+import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,16 +34,22 @@ import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.ui.text.style.TextOverflow
 import com.app.domain.products.Product
-import com.app.elrosal.ui.common.ImageLoader
+import com.app.elrosal.ui.common.AsyncImagePainter
 import com.app.elrosal.ui.theme.CARD_HEIGHT_PRODUCTS
 import com.app.elrosal.ui.theme.CATEGORIES_ELEVATION
+
 import com.app.elrosal.ui.theme.IMAGE_HEIGHT_PRODUCTS
 import com.app.elrosal.ui.theme.PADDING_16
 import com.app.elrosal.ui.theme.PADDING_8
 import com.app.elrosal.ui.theme.ROUND_CORNERS_16
 
 @Composable
-fun ProductsScreen(subCategories: SubCategories, products: Products) {
+fun ProductsScreen(
+    subCategories: SubCategories,
+    products: Products,
+    id: String,
+) {
+    Log.d("Daniel", "ProductsScreen: $id")
     Column(modifier = Modifier.background(colorScheme.background)) {
         TitleContent(
             modifier = Modifier
@@ -103,13 +111,16 @@ fun ProductItem(product: Product) {
                 overflow = TextOverflow.Ellipsis
             )
 
-            ImageLoader(
-                modifier = Modifier
-                    .width(IMAGE_HEIGHT_PRODUCTS)
-                    .height(IMAGE_HEIGHT_PRODUCTS),
-                url = product.image,
-                contentDescription = product.name
-            )
+            AsyncImagePainter(url = product.image) { painter ->
+                Image(
+                    painter = painter,
+                    contentDescription = product.name,
+                    modifier = Modifier
+                        .width(IMAGE_HEIGHT_PRODUCTS)
+                        .height(IMAGE_HEIGHT_PRODUCTS)
+                        .align(Alignment.TopCenter)
+                )
+            }
         }
 
 
@@ -209,6 +220,10 @@ fun ProductsScreenPreview() {
     )
     val subCategories = SubCategories("Infantil", listCategories)
     ElRosalTheme {
-        ProductsScreen(subCategories = subCategories, products = listProducts)
+        ProductsScreen(
+            subCategories = subCategories,
+            products = listProducts,
+            id = "1",
+        )
     }
 }

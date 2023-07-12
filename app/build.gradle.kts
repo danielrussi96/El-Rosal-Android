@@ -62,6 +62,7 @@ dependencies {
     implementation(libs.material3)
     implementation(libs.bundles.shared.repository)
     implementation(libs.coil)
+    implementation(libs.navigation.compose)
 
     implementation("io.insert-koin:koin-core:3.3.3")
     implementation("io.insert-koin:koin-android:3.3.3")

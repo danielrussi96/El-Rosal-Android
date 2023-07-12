@@ -1,6 +1,8 @@
 package com.app.elrosal.ui.common
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,10 +15,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CardDefaults.cardColors
 import androidx.compose.material3.CardDefaults.cardElevation
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
@@ -41,6 +41,7 @@ import com.app.elrosal.ui.theme.WIDTH_150
 @Composable
 fun CategoriesItem(
     categoriesItem: CategoriesItem,
+    navigateToProductScreen: (String) -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -54,7 +55,10 @@ fun CategoriesItem(
                 .fillMaxWidth()
                 .padding(start = PADDING_16, end = PADDING_16, top = PADDING_40)
                 .height(CARD_HEIGHT_CATEGORIES)
-                .align(Alignment.BottomCenter),
+                .align(Alignment.BottomCenter)
+                .clickable {
+                    navigateToProductScreen(categoriesItem.id)
+                },
             colors = cardColors(
                 containerColor = colorScheme.surface
             ),
@@ -79,14 +83,18 @@ fun CategoriesItem(
             }
         }
 
-        ImageLoader(
-            modifier = Modifier
-                .width(IMAGE_HEIGHT_CATEGORIES)
-                .height(IMAGE_HEIGHT_CATEGORIES)
-                .align(Alignment.TopCenter),
-            url = categoriesItem.image,
-            contentDescription = categoriesItem.name
-        )
+        AsyncImagePainter(
+            url = categoriesItem.image
+        ) { painter ->
+            Image(
+                painter = painter,
+                contentDescription = categoriesItem.name,
+                modifier = Modifier
+                    .width(IMAGE_HEIGHT_CATEGORIES)
+                    .height(IMAGE_HEIGHT_CATEGORIES)
+                    .align(Alignment.TopCenter)
+            )
+        }
 
     }
 }

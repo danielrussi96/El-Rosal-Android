@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.app.data.EnvironmentConfig
 import com.app.domain.categories.SubCategories
 import com.app.domain.products.Products
-import com.app.elrosal.ui.home.view.CategoriesUiState
+import com.app.elrosal.ui.home.CategoriesUiState
 import com.app.usecases.categories.GetCategoriesUseCase
 import com.app.usecases.categories.GetSubCategoriesUseCase
 import com.app.usecases.products.GetProductsUseCase

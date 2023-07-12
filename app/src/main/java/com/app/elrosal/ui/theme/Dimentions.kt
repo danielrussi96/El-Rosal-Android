@@ -2,14 +2,14 @@ package com.app.elrosal.ui.theme
 
 import androidx.compose.ui.unit.dp
 
-val LOGO_HEIGHT = 200.dp
+val LOGO_HEIGHT = 168.dp
 
 val WIDTH_150 = 150.dp
 
 val CARD_HEIGHT_CATEGORIES = 152.dp
 val CARD_HEIGHT_PRODUCTS = 200.dp
 val CARD_HEIGHT_PRODUCT_DETAIL = 390.dp
-val IMAGE_HEIGHT_CATEGORIES = 140.dp
+val IMAGE_HEIGHT_CATEGORIES = 132.dp
 val IMAGE_HEIGHT_CATEGORIES_SHIMMER = 96.dp
 val IMAGE_HEIGHT_PRODUCTS = 160.dp
 val IMAGE_HEIGHT_PRODUCT_DETAIL = 256.dp

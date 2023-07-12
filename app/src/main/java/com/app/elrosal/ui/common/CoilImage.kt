@@ -5,30 +5,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 import androidx.compose.ui.platform.LocalContext
+import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.app.elrosal.R
 
 
 @Composable
-fun ImageLoader(
-    modifier: Modifier = Modifier,
+fun AsyncImagePainter(
     url: String,
-    contentDescription: String,
-    enableCrossFade: Boolean = true,
+    content: @Composable (AsyncImagePainter) -> Unit
 ) {
     val painter = rememberAsyncImagePainter(
         model = ImageRequest.Builder(LocalContext.current)
             .data(url)
             .placeholder(R.drawable.rosal_escudo)
             .error(R.drawable.rosal_escudo)
-            .crossfade(enableCrossFade)
             .build()
     )
-    Image(
-        painter = painter,
-        contentDescription = contentDescription,
-        modifier = modifier
-    )
-
+    content(painter)
 }

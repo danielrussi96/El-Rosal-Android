@@ -3,6 +3,7 @@ package com.app.elrosal.ui.products
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.Arrangement
@@ -18,7 +19,6 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -30,7 +30,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.app.domain.products.Detail
 import com.app.domain.products.Product
 import com.app.elrosal.ui.common.DescriptionProducts
-import com.app.elrosal.ui.common.ImageLoader
 import com.app.elrosal.ui.common.TitleContent
 import com.app.elrosal.ui.common.TitleProducts
 import com.app.elrosal.ui.theme.CARD_HEIGHT_PRODUCT_DETAIL
@@ -45,8 +44,8 @@ import kotlinx.coroutines.flow.collectLatest
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CardDefaults.cardColors
 import androidx.compose.material3.CardDefaults.cardElevation
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
+import com.app.elrosal.ui.common.AsyncImagePainter
 import com.app.elrosal.ui.common.SubTitleContent
 import com.app.elrosal.ui.theme.PADDING_8
 import com.app.elrosal.utils.ConstantsViews.DELAY_5000
@@ -150,18 +149,22 @@ fun ProductDetailContent(product: Product) {
                 animationSpec = tween(durationMillis = 300),
                 label = "imageSize"
             )
-            ImageLoader(
-                modifier = Modifier
-                    .width(IMAGE_HEIGHT_PRODUCT_DETAIL)
-                    .height(IMAGE_HEIGHT_PRODUCT_DETAIL)
-                    .graphicsLayer {
-                        scaleX = imageSize
-                        scaleY = imageSize
-                    },
-                url = product.details[index].image,
-                contentDescription = product.details[index].title.orEmpty(),
-                enableCrossFade = false
-            )
+
+            AsyncImagePainter(
+                url = product.details[index].image
+            ) { painter ->
+                Image(
+                    painter = painter,
+                    contentDescription = product.details[index].title.orEmpty(),
+                    modifier = Modifier
+                        .width(IMAGE_HEIGHT_PRODUCT_DETAIL)
+                        .height(IMAGE_HEIGHT_PRODUCT_DETAIL)
+                        .graphicsLayer {
+                            scaleX = imageSize
+                            scaleY = imageSize
+                        }
+                )
+            }
         }
 
     }

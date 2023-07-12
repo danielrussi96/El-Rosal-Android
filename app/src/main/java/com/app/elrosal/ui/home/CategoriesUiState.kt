@@ -1,4 +1,4 @@
-package com.app.elrosal.ui.home.view
+package com.app.elrosal.ui.home
 
 import com.app.domain.categories.CategoriesItem
 

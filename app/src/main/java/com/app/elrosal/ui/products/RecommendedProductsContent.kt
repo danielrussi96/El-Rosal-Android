@@ -1,5 +1,6 @@
 package com.app.elrosal.ui.products
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,8 +16,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.app.domain.products.Product
+import com.app.elrosal.ui.common.AsyncImagePainter
 import com.app.elrosal.ui.common.DescriptionProducts
-import com.app.elrosal.ui.common.ImageLoader
 import com.app.elrosal.ui.common.TitleProducts
 import com.app.elrosal.ui.theme.CATEGORIES_ELEVATION
 import com.app.elrosal.ui.theme.PADDING_16
@@ -41,13 +42,17 @@ fun RecommendedProductsContent(product: Product) {
                 .fillMaxWidth()
                 .padding(PADDING_16)
         ) {
-            ImageLoader(
-                modifier = Modifier
-                    .weight(WEIGHT_1F)
-                    .align(Alignment.CenterVertically),
-                url = product.image,
-                contentDescription = product.name
-            )
+
+            AsyncImagePainter(url = product.image) { painter ->
+                Image(
+                    modifier = Modifier
+                        .weight(WEIGHT_1F)
+                        .align(Alignment.CenterVertically),
+                    painter = painter,
+                    contentDescription = product.name
+                )
+            }
+
             Column(
                 modifier = Modifier.weight(WEIGHT_2F),
                 verticalArrangement = Arrangement.Bottom,

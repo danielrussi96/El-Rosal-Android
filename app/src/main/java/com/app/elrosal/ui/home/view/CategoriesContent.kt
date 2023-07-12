@@ -20,12 +20,14 @@ import com.app.elrosal.R
 import com.app.elrosal.ui.common.CategoriesItem
 import com.app.elrosal.ui.common.CategoriesItemShimmer
 import com.app.elrosal.ui.common.SubTitleContent
+import com.app.elrosal.ui.home.CategoriesUiState
 import com.app.elrosal.ui.theme.PADDING_16
 import com.app.elrosal.utils.ConstantsViews.COUNT_GRID_COLUMNS_2
 
 @Composable
 fun CategoriesContent(
-    mainViewModel: MainViewModel
+    mainViewModel: MainViewModel,
+    navigateToProductScreen: (String) -> Unit
 ) {
     val lifecycle = LocalLifecycleOwner.current.lifecycle
 
@@ -82,7 +84,7 @@ fun CategoriesContent(
                     items(categories, key = { item ->
                         item.id
                     }) { category ->
-                        CategoriesItem(categoriesItem = category)
+                        CategoriesItem(categoriesItem = category, navigateToProductScreen = navigateToProductScreen)
                     }
                 })
         }
