@@ -1,4 +1,4 @@
-package com.app.elrosal.ui.products
+package com.app.elrosal.ui.products.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement

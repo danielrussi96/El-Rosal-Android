@@ -68,7 +68,11 @@ dependencies {
     implementation("io.insert-koin:koin-android:3.3.3")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
     implementation("androidx.core:core-splashscreen:1.0.0")
+
+    implementation("androidx.paging:paging-compose:3.2.0-rc01")
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

@@ -21,7 +21,7 @@ import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
     primary = Black900,
-    primaryContainer = Black900,
+    primaryContainer = Black700,
     background = Black900,
     surface = Black800,
     secondary = Apricot400,
@@ -41,7 +41,7 @@ private val LightColorScheme = lightColorScheme(
 @Composable
 fun ElRosalTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

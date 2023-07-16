@@ -26,27 +26,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import com.app.domain.categories.CategoriesItem
+import com.app.domain.categories.remote.Category
 import com.app.elrosal.ui.theme.CARD_HEIGHT_CATEGORIES
 import com.app.elrosal.ui.theme.CATEGORIES_ELEVATION
 import com.app.elrosal.ui.theme.HEIGHT_16
-import com.app.elrosal.ui.theme.HEIGHT_200
-import com.app.elrosal.ui.theme.IMAGE_HEIGHT_CATEGORIES
+import com.app.elrosal.ui.theme.HEIGHT_216
 import com.app.elrosal.ui.theme.IMAGE_HEIGHT_CATEGORIES_SHIMMER
 import com.app.elrosal.ui.theme.PADDING_16
 import com.app.elrosal.ui.theme.PADDING_40
 import com.app.elrosal.ui.theme.ROUND_CORNERS_16
-import com.app.elrosal.ui.theme.WIDTH_150
+import com.app.elrosal.ui.theme.WIDTH_176
+
 
 @Composable
 fun CategoriesItem(
-    categoriesItem: CategoriesItem,
+    category: Category,
+    modifier: Modifier,
     navigateToProductScreen: (String) -> Unit
 ) {
     Box(
         modifier = Modifier
-            .width(WIDTH_150)
-            .height(HEIGHT_200)
+            .width(WIDTH_176)
+            .height(HEIGHT_216)
             .padding(bottom = PADDING_16)
     ) {
 
@@ -57,7 +58,7 @@ fun CategoriesItem(
                 .height(CARD_HEIGHT_CATEGORIES)
                 .align(Alignment.BottomCenter)
                 .clickable {
-                    navigateToProductScreen(categoriesItem.id)
+                    navigateToProductScreen(category.id)
                 },
             colors = cardColors(
                 containerColor = colorScheme.surface
@@ -73,7 +74,7 @@ fun CategoriesItem(
             ) {
                 Text(
                     modifier = Modifier.fillMaxWidth(),
-                    text = categoriesItem.name,
+                    text = category.name,
                     color = colorScheme.secondary,
                     style = typography.titleMedium,
                     maxLines = 1,
@@ -84,15 +85,12 @@ fun CategoriesItem(
         }
 
         AsyncImagePainter(
-            url = categoriesItem.image
+            url = category.image
         ) { painter ->
             Image(
                 painter = painter,
-                contentDescription = categoriesItem.name,
-                modifier = Modifier
-                    .width(IMAGE_HEIGHT_CATEGORIES)
-                    .height(IMAGE_HEIGHT_CATEGORIES)
-                    .align(Alignment.TopCenter)
+                contentDescription = category.name,
+                modifier = modifier.align(Alignment.TopCenter)
             )
         }
 
@@ -104,8 +102,8 @@ fun CategoriesItemShimmer() {
     AnimatedShimmer { brush ->
         Box(
             modifier = Modifier
-                .width(WIDTH_150)
-                .height(HEIGHT_200)
+                .width(WIDTH_176)
+                .height(HEIGHT_216)
                 .padding(bottom = PADDING_16)
         ) {
             Card(
