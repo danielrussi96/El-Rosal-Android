@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.app.elrosal.MainViewModel
 import com.app.elrosal.model.Routes
+import com.app.elrosal.navigation.destinations.detailComposable
 import com.app.elrosal.navigation.destinations.homeComposable
 import com.app.elrosal.navigation.destinations.productsComposable
 
@@ -21,6 +22,7 @@ fun SetupNavigation(
 
     NavHost(navController = navController, startDestination = Routes.Home.route) {
         homeComposable(mainViewModel = mainViewModel, navigateToProductScreen = screens.products)
-        productsComposable(mainViewModel = mainViewModel)
+        productsComposable(mainViewModel = mainViewModel, navigateToDetailScreen = screens.detail)
+        detailComposable(mainViewModel = mainViewModel)
     }
 }

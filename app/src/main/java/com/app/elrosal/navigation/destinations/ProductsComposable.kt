@@ -4,14 +4,14 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.app.domain.products.Products
 import com.app.elrosal.MainViewModel
 import com.app.elrosal.model.Routes
 import com.app.elrosal.ui.products.view.ProductsScreen
 import com.app.elrosal.utils.Constants.PRODUCTS_ARGUMENT_KEY
 
 fun NavGraphBuilder.productsComposable(
-    mainViewModel: MainViewModel
+    mainViewModel: MainViewModel,
+    navigateToDetailScreen: (String) -> Unit
 ) {
     composable(
         route = "${Routes.Products.route}/{id}",
@@ -22,7 +22,8 @@ fun NavGraphBuilder.productsComposable(
         val id = navBackStackEntry.arguments?.getString(PRODUCTS_ARGUMENT_KEY).orEmpty()
         ProductsScreen(
             mainViewModel = mainViewModel,
-            id = id
+            id = id,
+            navigateToDetailScreen = navigateToDetailScreen
         )
     }
 }

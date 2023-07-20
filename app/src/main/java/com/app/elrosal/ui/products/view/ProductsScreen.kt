@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,6 +23,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults.cardColors
 import androidx.compose.material3.CardDefaults.cardElevation
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
@@ -37,13 +37,10 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.paging.PagingData
-import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.app.domain.products.Product
 import com.app.elrosal.MainViewModel
 import com.app.elrosal.ui.common.AsyncImagePainter
-import com.app.elrosal.ui.products.ProductsUiState
 import com.app.elrosal.ui.products.SubCategoriesUiState
 import com.app.elrosal.ui.theme.CARD_HEIGHT_PRODUCTS
 import com.app.elrosal.ui.theme.CATEGORIES_ELEVATION
@@ -52,13 +49,18 @@ import com.app.elrosal.ui.theme.IMAGE_HEIGHT_PRODUCTS
 import com.app.elrosal.ui.theme.PADDING_16
 import com.app.elrosal.ui.theme.PADDING_8
 import com.app.elrosal.ui.theme.ROUND_CORNERS_16
-import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun ProductsScreen(
     mainViewModel: MainViewModel,
-    id: String
+    id: String,
+    navigateToDetailScreen: (String) -> Unit
 ) {
+
+    LaunchedEffect(key1 = id){
+        mainViewModel.getSubCategories(id = id)
+    }
+
     var categoryName by remember { mutableStateOf("") }
     val lifecycle = LocalLifecycleOwner.current.lifecycle
 
@@ -73,8 +75,6 @@ fun ProductsScreen(
             }
         }
     }
-
-    mainViewModel.getSubCategories(id = id)
 
     when (uiState) {
 
@@ -94,14 +94,13 @@ fun ProductsScreen(
                 }
                 ProductsContent(
                     categoryName = categoryName,
-                    mainViewModel = mainViewModel
+                    mainViewModel = mainViewModel,
+                    navigateToDetailScreen = navigateToDetailScreen
                 )
             }
         }
 
-        is SubCategoriesUiState.Error -> {
-            Log.d("Daniel", "ProductsScreen: Error")
-        }
+        is SubCategoriesUiState.Error -> {}
     }
 
 }
@@ -109,7 +108,8 @@ fun ProductsScreen(
 @Composable
 fun ProductsContent(
     categoryName: String,
-    mainViewModel: MainViewModel
+    mainViewModel: MainViewModel,
+    navigateToDetailScreen: (String) -> Unit
 ) {
 
     val lazyPagingItems =
@@ -131,14 +131,18 @@ fun ProductsContent(
         items(products, key = { item ->
             item?.id ?: ""
         }) { product ->
-            if (product != null) ProductItem(product = product)
+            if (product != null) ProductItem(
+                product = product,
+                navigateToDetailScreen = navigateToDetailScreen
+            )
         }
 
     })
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductItem(product: Product) {
+fun ProductItem(product: Product, navigateToDetailScreen: (String) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -148,7 +152,10 @@ fun ProductItem(product: Product) {
             containerColor = colorScheme.surface,
         ),
         elevation = cardElevation(CATEGORIES_ELEVATION),
-        shape = RoundedCornerShape(ROUND_CORNERS_16)
+        shape = RoundedCornerShape(ROUND_CORNERS_16),
+        onClick = {
+            navigateToDetailScreen(product.id)
+        }
     ) {
 
         Box(

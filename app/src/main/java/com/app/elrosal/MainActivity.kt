@@ -26,7 +26,6 @@ class MainActivity : ComponentActivity() {
     private val mainViewModel: MainViewModel by viewModel()
     private lateinit var navHostController: NavHostController
 
-    @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()

@@ -18,14 +18,12 @@ class ProductsPagingSource(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Product> =
         try {
-            Log.d("Daniel", "loadUseCase: $id")
             val page = params.key ?: 0
             val data = getProductsUseCase.invoke(
                 environmentConfig = EnvironmentConfig.PRODUCTION,
                 id = id,
                 paginate = page,
             )
-            Log.d("Daniel", "load: ${data.listProducts.size}")
             LoadResult.Page(
                 data = data.listProducts,
                 prevKey = if (page == 0) null else page - 1,

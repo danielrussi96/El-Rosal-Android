@@ -10,11 +10,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults.cardColors
 import androidx.compose.material3.CardDefaults.cardElevation
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.app.domain.details.RecommendedProduct
 import com.app.domain.products.Product
 import com.app.elrosal.ui.common.AsyncImagePainter
 import com.app.elrosal.ui.common.DescriptionProducts
@@ -26,15 +28,20 @@ import com.app.elrosal.ui.theme.ROUND_CORNERS_16
 import com.app.elrosal.utils.ConstantsViews.WEIGHT_1F
 import com.app.elrosal.utils.ConstantsViews.WEIGHT_2F
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RecommendedProductsContent(product: Product) {
+fun RecommendedProductsContent(
+    recommendedProducts: RecommendedProduct,
+    navigateToDetailScreen: (String) -> Unit
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(PADDING_8),
-        colors = cardColors(colorScheme.secondary),
+        colors = cardColors(colorScheme.surface),
         elevation = cardElevation(CATEGORIES_ELEVATION),
-        shape = RoundedCornerShape(ROUND_CORNERS_16)
+        shape = RoundedCornerShape(ROUND_CORNERS_16),
+        onClick = { navigateToDetailScreen(recommendedProducts.id) }
     ) {
 
         Row(
@@ -43,13 +50,13 @@ fun RecommendedProductsContent(product: Product) {
                 .padding(PADDING_16)
         ) {
 
-            AsyncImagePainter(url = product.image) { painter ->
+            AsyncImagePainter(url = recommendedProducts.image) { painter ->
                 Image(
                     modifier = Modifier
                         .weight(WEIGHT_1F)
                         .align(Alignment.CenterVertically),
                     painter = painter,
-                    contentDescription = product.name
+                    contentDescription = recommendedProducts.name
                 )
             }
 
@@ -58,10 +65,10 @@ fun RecommendedProductsContent(product: Product) {
                 verticalArrangement = Arrangement.Bottom,
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                TitleProducts(titleProducts = product.name)
+                TitleProducts(titleProducts = recommendedProducts.name)
                 DescriptionProducts(
                     modifier = Modifier.padding(PADDING_16),
-                    descriptionProducts = product.description
+                    descriptionProducts = recommendedProducts.description
                 )
             }
         }
@@ -69,19 +76,3 @@ fun RecommendedProductsContent(product: Product) {
     }
 }
 
-
-@Composable
-@Preview(showBackground = true)
-fun RecommendedProductsContentPreview() {
-    val product = Product(
-        categoryId = "1",
-        description = "description",
-        details = emptyList(),
-        id = "1",
-        image = "https://firebasestorage.googleapis.com/v0/b/el-rosal-177df.appspot.com/o/RosalStorage%2FCategories%2Fdesayunos_300x300.webp?alt=media&token=db13db47-455d-452f-ab33-2c3f3c80b50e",
-        name = "Paw Patrol",
-        position = 1,
-        subCategoryId = "",
-    )
-    RecommendedProductsContent(product = product)
-}

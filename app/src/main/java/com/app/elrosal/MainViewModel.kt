@@ -15,6 +15,7 @@ import androidx.paging.cachedIn
 import com.app.data.EnvironmentConfig
 import com.app.domain.products.Product
 import com.app.elrosal.ui.home.CategoriesUiState
+import com.app.elrosal.ui.products.DetailProductUiState
 import com.app.elrosal.ui.products.ProductsUiState
 import com.app.elrosal.ui.products.ProductsUiState.Success
 import com.app.elrosal.ui.products.ProductsUiState.Error
@@ -22,6 +23,7 @@ import com.app.elrosal.ui.products.SubCategoriesUiState
 import com.app.elrosal.ui.products.paginate.ProductsPagingSource
 import com.app.usecases.categories.GetCategoriesUseCase
 import com.app.usecases.categories.GetSubCategoriesUseCase
+import com.app.usecases.details.GetDetailProductUseCase
 import com.app.usecases.products.GetProductsUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -42,7 +44,8 @@ import kotlinx.coroutines.launch
 class MainViewModel(
     private val getCategoriesUseCase: GetCategoriesUseCase,
     private val getSubCategoriesUseCase: GetSubCategoriesUseCase,
-    private val getProductsUseCase: GetProductsUseCase
+    private val getProductsUseCase: GetProductsUseCase,
+    private val getDetailProductUseCase: GetDetailProductUseCase
 ) : ViewModel() {
 
     private val _uiStateCategories = MutableStateFlow<CategoriesUiState>(CategoriesUiState.Loading)
@@ -51,6 +54,10 @@ class MainViewModel(
     private val _uiStateSubCategories =
         MutableStateFlow<SubCategoriesUiState>(SubCategoriesUiState.Loading)
     val uiStateSubCategories: StateFlow<SubCategoriesUiState> = _uiStateSubCategories.asStateFlow()
+
+    private val _uiStateDetailProduct =
+        MutableStateFlow<DetailProductUiState>(DetailProductUiState.Loading)
+    val uiStateDetailProduct: StateFlow<DetailProductUiState> = _uiStateDetailProduct.asStateFlow()
 
     private val subCategoryIdFlow = MutableStateFlow("")
 
@@ -97,4 +104,19 @@ class MainViewModel(
             config = PagingConfig(pageSize = 10)
         ).flow
     }.cachedIn(viewModelScope)
+
+    fun getDetailProduct(id: String) {
+        viewModelScope.launch {
+            getDetailProductUseCase(
+                environmentConfig = EnvironmentConfig.PRODUCTION,
+                id = id,
+                detailProduct = { detailProduct ->
+                    _uiStateDetailProduct.update { DetailProductUiState.Success(detailProduct) }
+                },
+                error = { error ->
+                    _uiStateDetailProduct.update { DetailProductUiState.Error(error) }
+                }
+            )
+        }
+    }
 }
