@@ -73,7 +73,7 @@ fun CategoriesContent(
         }
 
         is CategoriesUiState.Success -> {
-            val data = (uiState as CategoriesUiState.Success).categories
+            val data = (uiState as CategoriesUiState.Success).categories ?: emptyList()
             LazyVerticalGrid(
                 modifier = Modifier.fillMaxSize(),
                 columns = GridCells.Fixed(COUNT_GRID_COLUMNS_2),
