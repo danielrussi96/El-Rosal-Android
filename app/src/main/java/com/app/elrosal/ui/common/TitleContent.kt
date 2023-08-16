@@ -11,7 +11,7 @@ import androidx.compose.ui.text.style.TextOverflow
 
 
 @Composable
-fun TitleContent(modifier: Modifier, title: String) {
+fun TitleContent(modifier: Modifier = Modifier, title: String) {
     Text(
         modifier = modifier,
         style = typography.headlineLarge,
@@ -22,7 +22,7 @@ fun TitleContent(modifier: Modifier, title: String) {
 }
 
 @Composable
-fun SubTitleContent(modifier: Modifier, subTitle: String) {
+fun SubTitleContent(modifier: Modifier = Modifier, subTitle: String) {
     Text(
         modifier = modifier,
         text = subTitle,
@@ -44,11 +44,11 @@ fun TitleProducts(titleProducts: String) {
 }
 
 @Composable
-fun DescriptionProducts(modifier: Modifier, descriptionProducts: String) {
+fun DescriptionProducts(modifier: Modifier, descriptionProducts: String, maxLines: Int = 3) {
     Text(
         modifier = modifier,
         text = descriptionProducts,
-        maxLines = 3,
+        maxLines = maxLines,
         style = typography.bodyMedium,
         textAlign = TextAlign.Justify,
         color = colorScheme.tertiary,

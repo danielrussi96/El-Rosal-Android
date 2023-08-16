@@ -8,9 +8,14 @@ import com.app.elrosal.ui.home.view.HomeScreen
 
 fun NavGraphBuilder.homeComposable(
     mainViewModel: MainViewModel,
-    navigateToProductScreen: (String) -> Unit
+    navigateToProductScreen: (String) -> Unit,
+    permissionCall: () -> Unit
 ) {
     composable(Routes.Home.route) {
-        HomeScreen(mainViewModel = mainViewModel, navigateToProductScreen = navigateToProductScreen)
+        HomeScreen(
+            mainViewModel = mainViewModel,
+            navigateToProductScreen = navigateToProductScreen,
+            permissionCall = permissionCall
+        )
     }
 }

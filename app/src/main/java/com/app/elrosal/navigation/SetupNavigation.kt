@@ -13,7 +13,8 @@ import com.app.elrosal.navigation.destinations.productsComposable
 @Composable
 fun SetupNavigation(
     navController: NavHostController,
-    mainViewModel: MainViewModel
+    mainViewModel: MainViewModel,
+    permissionCall: () -> Unit
 ) {
 
     val screens = remember(navController) {
@@ -21,7 +22,11 @@ fun SetupNavigation(
     }
 
     NavHost(navController = navController, startDestination = Routes.Home.route) {
-        homeComposable(mainViewModel = mainViewModel, navigateToProductScreen = screens.products)
+        homeComposable(
+            mainViewModel = mainViewModel,
+            navigateToProductScreen = screens.products,
+            permissionCall = permissionCall
+        )
         productsComposable(mainViewModel = mainViewModel, navigateToDetailScreen = screens.detail)
         detailComposable(mainViewModel = mainViewModel)
     }

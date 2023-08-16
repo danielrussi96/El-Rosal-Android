@@ -3,6 +3,7 @@ package com.app.elrosal.ui.theme
 import androidx.compose.ui.unit.dp
 
 val LOGO_HEIGHT = 168.dp
+val LOGO_MIN_HEIGHT = 96.dp
 
 val WIDTH_176 = 176.dp
 
@@ -31,6 +32,9 @@ val CATEGORIES_ELEVATION = 8.dp
 
 
 val ROUND_CORNERS_16 = 16.dp
+val ROUND_CORNERS_8 = 8.dp
+
+val ICON_SIZE_40 = 40.dp
 
 
 

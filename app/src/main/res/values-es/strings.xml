@@ -4,4 +4,13 @@
     <string name="categories_label">Categorias</string>
     <string name="detail_label">Detalle de producto</string>
     <string name="recommended_label">Productos recomendados</string>
+    <string name="call_us">Llámanos</string>
+    <string name="write_us">Escríbenos</string>
+    <string name="contact_us">Contáctanos</string>
+    <string name="contact_us_description">¡Bienvenido a nuestra aplicación! Para realizar un pedido y contactarnos, simplemente ingresa tu número de teléfono en la sección correspondiente. Estamos aquí para ayudarte en todo momento y asegurarnos de que tu experiencia de compra sea fácil y conveniente. ¡Esperamos servirte pronto!</string>
+    <string name="phone_number_hint">Ingresa tu número de celular</string>
+    <string name="phone_error_message">Ingresa un número de celular válido.</string>
+    <string name="send">Enviar</string>
+    <string name="error">Error</string>
+    <string name="sending_message">Enviando mensaje…</string>
 </resources>

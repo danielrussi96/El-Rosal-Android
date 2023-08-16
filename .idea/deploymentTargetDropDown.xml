@@ -5,7 +5,23 @@
       <entry key="CategoriesItemShimmerPreview">
         <State />
       </entry>
-      <entry key="HomeScreenPreview">
+      <entry key="LoadingMessageWhatsappPreview">
+        <State>
+          <targetSelectedWithDropDown>
+            <Target>
+              <type value="QUICK_BOOT_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\daniel.alvarado\.android\avd\Pixel_2_API_31_2.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2023-08-15T01:17:02.883707300Z" />
+        </State>
+      </entry>
+      <entry key="ModalPhoneNumberPreview">
         <State />
       </entry>
       <entry key="ProductDetailScreenPreview">
@@ -14,23 +30,20 @@
       <entry key="ProductsScreenPreview">
         <State />
       </entry>
-      <entry key="SubCategoriesContentPreview">
-        <State />
-      </entry>
       <entry key="app">
         <State>
-          <runningDeviceTargetSelectedWithDropDown>
+          <targetSelectedWithDropDown>
             <Target>
-              <type value="RUNNING_DEVICE_TARGET" />
+              <type value="QUICK_BOOT_TARGET" />
               <deviceKey>
                 <Key>
-                  <type value="SERIAL_NUMBER" />
-                  <value value="ef1d0695" />
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\daniel.alvarado\.android\avd\Pixel_2_API_31_2.avd" />
                 </Key>
               </deviceKey>
             </Target>
-          </runningDeviceTargetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2023-07-28T19:12:40.765101700Z" />
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2023-08-15T01:09:08.259834500Z" />
         </State>
       </entry>
     </value>

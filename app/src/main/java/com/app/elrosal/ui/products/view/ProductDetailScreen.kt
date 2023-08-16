@@ -131,7 +131,7 @@ fun ProductDetailScreen(mainViewModel: MainViewModel, id: String) {
 @Composable
 fun ProductDetailContent(detailProduct: DetailProduct) {
 
-    val pagerState = rememberPagerState()
+    val pagerState = rememberPagerState { detailProduct.details.size }
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -185,7 +185,7 @@ fun ProductDetailContent(detailProduct: DetailProduct) {
 
         HorizontalPager(
             modifier = Modifier
-                .fillMaxWidth(), pageCount = detailProduct.details.size, state = pagerState
+                .fillMaxWidth(), state = pagerState
         ) { index ->
 
             val pageOffset =

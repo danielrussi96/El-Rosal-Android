@@ -4,4 +4,13 @@
     <string name="categories_label">Categories</string>
     <string name="detail_label">Product detail</string>
     <string name="recommended_label">Recommended products</string>
+    <string name="call_us">Call us</string>
+    <string name="write_us">Write to us</string>
+    <string name="contact_us">Contact us</string>
+    <string name="contact_us_description">Welcome to our application! To place an order and get in touch with us, simply enter your phone number in the corresponding section. We are here to assist you at all times and ensure your shopping experience is easy and convenient. We look forward to serving you soon!</string>
+    <string name="phone_number_hint">Enter your phone number </string>
+    <string name="phone_error_message">Enter a valid phone number.</string>
+    <string name="send">Send</string>
+    <string name="error">Error</string>
+    <string name="sending_message">Sending message…</string>
 </resources>

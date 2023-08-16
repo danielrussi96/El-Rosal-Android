@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "com.app.elrosal"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.app.elrosal"
         minSdk = 26
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.bundles.shared.repository)
     implementation(libs.coil)
     implementation(libs.navigation.compose)
+    implementation(libs.lottie)
 
     implementation("io.insert-koin:koin-core:3.3.3")
     implementation("io.insert-koin:koin-android:3.3.3")

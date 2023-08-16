@@ -19,6 +19,8 @@ dependencyResolutionManagement {
                 password = "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"
             }
         }
+
+        maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots/") }
     }
 }
 
