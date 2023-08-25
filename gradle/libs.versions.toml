@@ -11,7 +11,7 @@ kotlin = "1.8.10"
 lifecycle-runtime-ktx = "2.6.1"
 lottie = "6.1.0"
 navigation-compose = "2.7.0"
-shared-repository = "1.5.4"
+shared-repository = "1.5.5"
 
 
 [libraries]
