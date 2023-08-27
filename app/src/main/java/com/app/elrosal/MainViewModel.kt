@@ -1,6 +1,5 @@
 package com.app.elrosal
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
@@ -83,15 +82,14 @@ class MainViewModel(
 
     fun getSubCategories(id: String) {
         viewModelScope.launch {
-            getSubCategoriesUseCase(
-                environmentConfig = EnvironmentConfig.PRODUCTION,
-                id = id,
-                subCategories = { subCategories ->
-                    _uiStateSubCategories.update { SubCategoriesUiState.Success(subCategories) }
-                },
-                error = { error ->
-                    _uiStateSubCategories.update { SubCategoriesUiState.Error(error) }
-                })
+            val subCategories = getSubCategoriesUseCase(
+                environmentConfig = EnvironmentConfig.PRODUCTION, id = id
+            )
+            if (subCategories != null)
+                _uiStateSubCategories.update { SubCategoriesUiState.Success(subCategories) }
+            else
+                _uiStateSubCategories.update { SubCategoriesUiState.Error("Error") }
+
         }
     }
 
@@ -114,16 +112,14 @@ class MainViewModel(
 
     fun getDetailProduct(id: String) {
         viewModelScope.launch {
-            getDetailProductUseCase(
+            val detailProduct = getDetailProductUseCase(
                 environmentConfig = EnvironmentConfig.PRODUCTION,
-                id = id,
-                detailProduct = { detailProduct ->
-                    _uiStateDetailProduct.update { DetailProductUiState.Success(detailProduct) }
-                },
-                error = { error ->
-                    _uiStateDetailProduct.update { DetailProductUiState.Error(error) }
-                }
+                id = id
             )
+            if (detailProduct != null)
+                _uiStateDetailProduct.update { DetailProductUiState.Success(detailProduct) }
+            else
+                _uiStateDetailProduct.update { DetailProductUiState.Error("Error") }
         }
     }
 

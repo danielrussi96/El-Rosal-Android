@@ -2,34 +2,6 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="CategoriesItemShimmerPreview">
-        <State />
-      </entry>
-      <entry key="LoadingMessageWhatsappPreview">
-        <State>
-          <targetSelectedWithDropDown>
-            <Target>
-              <type value="QUICK_BOOT_TARGET" />
-              <deviceKey>
-                <Key>
-                  <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\daniel.alvarado\.android\avd\Pixel_2_API_31_2.avd" />
-                </Key>
-              </deviceKey>
-            </Target>
-          </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2023-08-15T01:17:02.883707300Z" />
-        </State>
-      </entry>
-      <entry key="ModalPhoneNumberPreview">
-        <State />
-      </entry>
-      <entry key="ProductDetailScreenPreview">
-        <State />
-      </entry>
-      <entry key="ProductsScreenPreview">
-        <State />
-      </entry>
       <entry key="app">
         <State>
           <targetSelectedWithDropDown>
