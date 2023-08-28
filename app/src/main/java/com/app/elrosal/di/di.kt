@@ -1,6 +1,5 @@
 package com.app.elrosal.di
 
-import androidx.core.content.PermissionChecker
 import com.app.elrosal.MainViewModel
 import com.app.elrosal.data.AndroidPermissionChecker
 import com.app.library.shared.cache.DriverFactory

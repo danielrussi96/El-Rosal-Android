@@ -2,14 +2,13 @@ package com.app.elrosal.ui.main
 
 import app.cash.turbine.test
 import com.app.data.EnvironmentConfig
-import com.app.domain.categories.remote.Category
 import com.app.domain.categories.remote.SubCategories
-import com.app.domain.details.Detail
-import com.app.domain.details.DetailProduct
 import com.app.domain.details.ProductDescription
-import com.app.domain.details.RecommendedProduct
 import com.app.domain.user.Whatsapp
 import com.app.elrosal.MainViewModel
+import com.app.elrosal.sampleDetailProduct
+import com.app.elrosal.sampleRecommendedProduct
+import com.app.elrosal.sampleSubCategories
 import com.app.elrosal.testrules.CoroutinesTestRule
 import com.app.elrosal.ui.home.WhatsappUiState
 import com.app.elrosal.ui.products.DetailProductUiState
@@ -118,7 +117,12 @@ class MainViewModelTest {
     @Test
     fun `State get detail product is update with request service`() = runTest {
         // Given
-        mockGetDetailProductUseCase(sampleProductDescription)
+        mockGetDetailProductUseCase(
+            productDescription = ProductDescription(
+                detailProduct = sampleDetailProduct,
+                recommendedProducts = sampleRecommendedProduct
+            )
+        )
 
         // When
         mainViewModel.getDetailProduct(id = "PSG1vz4CLYLpEkY8XNpJ")
@@ -127,9 +131,15 @@ class MainViewModelTest {
         mainViewModel.uiStateDetailProduct.test {
             assertEquals(DetailProductUiState.Loading, awaitItem())
             assertEquals(
-                DetailProductUiState.Success(productDescription = sampleProductDescription),
+                DetailProductUiState.Success(
+                    productDescription = ProductDescription(
+                        detailProduct = sampleDetailProduct,
+                        recommendedProducts = sampleRecommendedProduct
+                    )
+                ),
                 awaitItem()
             )
+            cancel()
         }
     }
 
@@ -145,6 +155,7 @@ class MainViewModelTest {
         mainViewModel.uiStateDetailProduct.test {
             assertEquals(DetailProductUiState.Loading, awaitItem())
             assertEquals(DetailProductUiState.Error(message = "Error"), awaitItem())
+            cancel()
         }
     }
 
@@ -163,6 +174,7 @@ class MainViewModelTest {
                 SubCategoriesUiState.Success(subCategories = sampleSubCategories),
                 awaitItem()
             )
+            cancel()
         }
     }
 
@@ -179,6 +191,7 @@ class MainViewModelTest {
         mainViewModel.uiStateSubCategories.test {
             assertEquals(SubCategoriesUiState.Loading, awaitItem())
             assertEquals(SubCategoriesUiState.Error(message = "Error"), awaitItem())
+            cancel()
         }
     }
 
@@ -261,45 +274,14 @@ private suspend fun MainViewModelTest.mockGetSubCategoriesUseCase(subCategories:
     ).thenReturn(subCategories)
 }
 
-private val sampleWhatsapp = Whatsapp(
+val sampleWhatsapp = Whatsapp(
     phoneNumber = "573429544253",
     message = "Hola, quiero hacer un pedido",
     image = "https://firebasestorage.googleapis.com/v0/b/el-rosal-177df.appspot.com/o/RosalStorage"
 )
 
-private val sampleSubCategories = SubCategories(
-    subCategories = listOf(
-        Category(
-            id = "PSG1vz4CLYLpEkY8XNpJ",
-            image = "https://firebasestorage.googleapis.com/v0/b/el-rosal-177df.appspot.com/o/RosalStorage%",
-            name = "Juguetes",
-            position = 0
-        )
-    ),
-    name = "Juguetes",
-)
 
-private val sampleDetail = Detail(
-    image = "https://firebasestorage.googleapis.com/v0/b/el-rosal-177df.appspot.com/o/RosalStorage%",
-    title = "PSG1vz4CLYLpEkY8XNpJ"
-)
 
-private val sampleRecommendedProduct = RecommendedProduct(
-    description = "Diseño Paw Patrol",
-    id = "PSG1vz4CLYLpEkY8XNpJ",
-    image = "https://firebasestorage.googleapis.com/v0/b/el-rosal-177df.appspot.com/o/RosalStorage%",
-    name = "Paw Patrol"
-)
 
-private val sampleDetailProduct = DetailProduct(
-    description = "Diseño Paw Patrol",
-    details = listOf(sampleDetail),
-    image = "https://firebasestorage.googleapis.com/v0/b/el-rosal-177df.appspot.com/o/RosalStorage%",
-    name = "Paw Patrol"
-)
 
-private val sampleProductDescription = ProductDescription(
-    detailProduct = sampleDetailProduct,
-    recommendedProducts = listOf(sampleRecommendedProduct)
-)
 

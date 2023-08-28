@@ -67,6 +67,8 @@ dependencies {
 
     implementation("io.insert-koin:koin-core:3.3.3")
     implementation("io.insert-koin:koin-android:3.3.3")
+    testImplementation ("io.insert-koin:koin-test:3.3.3")
+    testImplementation ("io.insert-koin:koin-test-junit4:3.3.3")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
