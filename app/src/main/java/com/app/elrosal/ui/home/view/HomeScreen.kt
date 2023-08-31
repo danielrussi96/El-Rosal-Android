@@ -3,7 +3,6 @@ package com.app.elrosal.ui.home.view
 
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -42,21 +41,16 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
-import com.airbnb.lottie.LottieProperty
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
-import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.airbnb.lottie.compose.rememberLottieDynamicProperties
-import com.airbnb.lottie.compose.rememberLottieDynamicProperty
 import com.app.domain.user.Whatsapp
 import com.app.elrosal.MainViewModel
 import com.app.elrosal.R
 import com.app.elrosal.ui.common.ModalPhoneNumber
 import com.app.elrosal.ui.common.SubTitleContent
 import com.app.elrosal.ui.common.TitleContent
-import com.app.elrosal.ui.home.CategoriesUiState
 import com.app.elrosal.ui.home.WhatsappUiState
 import com.app.elrosal.ui.theme.CATEGORIES_ELEVATION
 import com.app.elrosal.ui.theme.ElRosalTheme
@@ -66,9 +60,6 @@ import com.app.elrosal.ui.theme.PADDING_16
 import com.app.elrosal.ui.theme.ROUND_CORNERS_8
 import com.app.elrosal.utils.ConstantsViews.WEIGHT_1F
 import com.app.elrosal.utils.decryptedData
-import java.util.Base64
-import javax.crypto.Cipher
-import javax.crypto.spec.SecretKeySpec
 
 @Composable
 fun HomeScreen(
@@ -160,7 +151,9 @@ fun CategoriesList(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                TitleContent(title = stringResource(id = R.string.app_name))
+                TitleContent(
+                    title = stringResource(id = R.string.app_name)
+                )
 
                 Row(
                     modifier = Modifier
@@ -186,9 +179,9 @@ fun CategoriesList(
                                 mainViewModel.getPhoneNumber()
 
                                 if (mainViewModel.phoneNumber.value != null) {
-                                    val phoneNumber = mainViewModel.phoneNumber.value?.decryptedData() ?: ""
+                                    val phoneNumber =
+                                        mainViewModel.phoneNumber.value?.decryptedData() ?: ""
                                     val updatedWhatsapp = whatsapp.copy(phoneNumber = phoneNumber)
-                                    Log.d("Daniel", "57${phoneNumber}")
                                     mainViewModel.postMessageWhatsapp(updatedWhatsapp)
                                 } else {
                                     showDialog = true
@@ -254,9 +247,6 @@ fun LoadingMessageWhatsapp() {
     }
 
 }
-
-
-
 
 
 @Preview

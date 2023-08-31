@@ -4,16 +4,16 @@ import app.cash.turbine.test
 import com.app.data.EnvironmentConfig
 import com.app.domain.categories.remote.SubCategories
 import com.app.domain.details.ProductDescription
-import com.app.domain.user.Whatsapp
 import com.app.elrosal.MainViewModel
-import com.app.elrosal.sampleDetailProduct
-import com.app.elrosal.sampleRecommendedProduct
-import com.app.elrosal.sampleSubCategories
 import com.app.elrosal.testrules.CoroutinesTestRule
 import com.app.elrosal.ui.home.WhatsappUiState
 import com.app.elrosal.ui.products.DetailProductUiState
 import com.app.elrosal.ui.products.SubCategoriesUiState
 import com.app.elrosal.utils.encryptPhoneNumber
+import com.app.testsharedapp.sampleDetailProduct
+import com.app.testsharedapp.sampleRecommendedProduct
+import com.app.testsharedapp.sampleSubCategories
+import com.app.testsharedapp.sampleWhatsapp
 import com.app.usecases.categories.GetCategoriesUseCase
 import com.app.usecases.categories.GetSubCategoriesUseCase
 import com.app.usecases.details.GetDetailProductUseCase
@@ -274,11 +274,7 @@ private suspend fun MainViewModelTest.mockGetSubCategoriesUseCase(subCategories:
     ).thenReturn(subCategories)
 }
 
-val sampleWhatsapp = Whatsapp(
-    phoneNumber = "573429544253",
-    message = "Hola, quiero hacer un pedido",
-    image = "https://firebasestorage.googleapis.com/v0/b/el-rosal-177df.appspot.com/o/RosalStorage"
-)
+
 
 
 

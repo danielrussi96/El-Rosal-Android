@@ -1,0 +1,44 @@
+[
+  {
+    "id": "85PXtMUmI3pIHUQ33P1D",
+    "isTopCategories": true,
+    "image": "https://firebasestorage.googleapis.com/v0/b/el-rosal-177df.appspot.com/o/RosalStorage%2FCategories%2Fdesayunos_300x300.webp?alt=media&token=db13db47-455d-452f-ab33-2c3f3c80b50e",
+    "position": 0,
+    "name": "El Desayunos"
+  },
+  {
+    "image": "https://firebasestorage.googleapis.com/v0/b/el-rosal-177df.appspot.com/o/RosalStorage%2FCategories%2Finfantil_categoria_300x300.webp?alt=media&token=4d313bf4-88cf-4f7a-bdcb-6a0cad7cc2c6",
+    "name": "Infantil",
+    "id": "y6TobdgcYGT5YQ6z4p0A",
+    "position": 0,
+    "isTopCategories": false
+  },
+  {
+    "id": "DXvVyEZBfarCKiHDtLd6",
+    "image": "https://firebasestorage.googleapis.com/v0/b/el-rosal-177df.appspot.com/o/RosalStorage%2FCategories%2Fantojos_300x300.webp?alt=media&token=163f2810-8976-4616-9ffe-958c553b9446",
+    "name": "Antojos Tradicionales",
+    "position": 1,
+    "isTopCategories": false
+  },
+  {
+    "id": "JUsz09rqDKpM2xMkdf1A",
+    "name": "Postres",
+    "image": "https://firebasestorage.googleapis.com/v0/b/el-rosal-177df.appspot.com/o/RosalStorage%2FCategories%2Fpostres_300x300.webp?alt=media&token=cec6e28b-50d6-4130-ab52-81ebb27c1dbb",
+    "position": 2,
+    "isTopCategories": false
+  },
+  {
+    "name": "Bebidas",
+    "id": "MwFFRSojj8cqJz8e2GGX",
+    "image": "https://firebasestorage.googleapis.com/v0/b/el-rosal-177df.appspot.com/o/RosalStorage%2FCategories%2Fjugos_300x300.webp?alt=media&token=df715ad8-65da-4406-beae-c5531b645503",
+    "position": 3,
+    "isTopCategories": false
+  },
+  {
+    "id": "xftcFv8yhoRLq4qUJ5aR",
+    "image": "https://firebasestorage.googleapis.com/v0/b/el-rosal-177df.appspot.com/o/RosalStorage%2FCategories%2Fpan_300x300.webp?alt=media&token=e255026d-cc72-47cc-94d0-3b7a814b66b6",
+    "name": "Panaderia",
+    "position": 4,
+    "isTopCategories": false
+  }
+]

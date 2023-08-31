@@ -52,8 +52,9 @@ android {
 
 dependencies {
 
+
     implementation(libs.core.ktx)
-    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.bundles.lifecycle)
     implementation(libs.activity.compose)
     implementation(platform(libs.compose.bom))
     implementation(libs.ui)
@@ -64,28 +65,31 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.navigation.compose)
     implementation(libs.lottie)
+    implementation(libs.bundles.koin)
+    implementation(libs.splashscreen)
+    implementation(libs.paging.compose)
 
-    implementation("io.insert-koin:koin-core:3.3.3")
-    implementation("io.insert-koin:koin-android:3.3.3")
-    testImplementation ("io.insert-koin:koin-test:3.3.3")
-    testImplementation ("io.insert-koin:koin-test-junit4:3.3.3")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
-    implementation("androidx.core:core-splashscreen:1.0.0")
-
-    implementation("androidx.paging:paging-compose:3.2.0-rc01")
-
-
+    
+    testImplementation(libs.bundles.koin.test)
     testImplementation(libs.junit)
     testImplementation(libs.mockito)
     testImplementation(libs.mockito.inline)
     testImplementation(libs.coroutines)
     testImplementation(libs.turbine)
+    testImplementation(project(":testSharedApp"))
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.ui.test.junit4)
+    androidTestImplementation(project(":testSharedApp"))
+    androidTestImplementation(libs.coroutines)
+    androidTestImplementation(libs.bundles.koin.test)
+    androidTestImplementation(libs.compose.test)
+    androidTestImplementation(libs.mockwebserver)
+    androidTestImplementation(libs.ktor.client.mock)
+    androidTestImplementation(libs.mockito)
+    androidTestImplementation(libs.mockito.inline)
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
+    debugImplementation(libs.compose.manifest)
 }

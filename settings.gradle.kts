@@ -26,4 +26,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "El Rosal"
 include(":app")
- 
+include(":testSharedApp")

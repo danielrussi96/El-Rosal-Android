@@ -2,6 +2,9 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="MainInstrumentationTest">
+        <State />
+      </entry>
       <entry key="app">
         <State>
           <targetSelectedWithDropDown>
@@ -15,8 +18,14 @@
               </deviceKey>
             </Target>
           </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2023-08-15T01:09:08.259834500Z" />
+          <timeTargetWasSelectedWithDropDown value="2023-08-29T00:19:46.611687200Z" />
         </State>
+      </entry>
+      <entry key="checkMockServerIsWorking()">
+        <State />
+      </entry>
+      <entry key="clickToCategoryNavigateToDetail()">
+        <State />
       </entry>
     </value>
   </component>

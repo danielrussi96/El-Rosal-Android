@@ -13,7 +13,6 @@ val RustyOrange600  = Color(0xFFCF892A)
 val RustyOrange800  = Color(0xFFC17120)
 val BlueGray900 = Color(0xFF2A2F4E)
 
-val Black500 = Color(0xFF7B7B7B)
 val Black700 = Color(0xFF434343)
 val Black800 = Color(0xFF242424)
 val Black900 = Color(0xFF000000)

@@ -1,6 +1,5 @@
 package com.app.elrosal.ui.home.view
 
-import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -15,6 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
@@ -25,7 +25,6 @@ import com.app.elrosal.ui.common.CategoriesItemShimmer
 import com.app.elrosal.ui.common.SubTitleContent
 import com.app.elrosal.ui.home.CategoriesUiState
 import com.app.elrosal.ui.theme.IMAGE_HEIGHT_CATEGORIES
-import com.app.elrosal.ui.theme.IMAGE_HEIGHT_SUBCATEGORIES
 import com.app.elrosal.ui.theme.PADDING_16
 import com.app.elrosal.utils.ConstantsViews.COUNT_GRID_COLUMNS_2
 
@@ -75,7 +74,7 @@ fun CategoriesContent(
         is CategoriesUiState.Success -> {
             val data = (uiState as CategoriesUiState.Success).categories ?: emptyList()
             LazyVerticalGrid(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxSize().testTag("categories_content"),
                 columns = GridCells.Fixed(COUNT_GRID_COLUMNS_2),
                 content = {
                     item(span = {

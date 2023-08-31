@@ -1,11 +1,10 @@
 package com.app.elrosal
 
-import android.app.Activity
 import com.app.elrosal.ui.common.permission.PermissionRequester
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-fun Activity.buildMainState(
+fun buildMainState(
     scope: CoroutineScope,
     permissionRequester: PermissionRequester,
 ) = MainState(scope, permissionRequester)

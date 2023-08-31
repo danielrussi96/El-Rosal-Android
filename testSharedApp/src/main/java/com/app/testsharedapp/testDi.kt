@@ -1,4 +1,4 @@
-package com.app.elrosal
+package com.app.testsharedapp
 
 import com.app.data.EnvironmentConfig
 import com.app.data.control.TimeStampResource
@@ -17,18 +17,14 @@ import com.app.domain.products.Detail as DetailProductImages
 import com.app.domain.products.Product
 import com.app.domain.products.Products
 import com.app.domain.user.Whatsapp
-import com.app.elrosal.ui.main.sampleWhatsapp
 import com.app.library.data.server.CategoriesServerDataSource
-import com.app.library.data.server.DetailsServerDataSource
 import com.app.library.di.dataModule
 import com.app.library.di.useCaseModule
-import com.app.library.shared.network.KtorClientFactory
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.factoryOf
-import org.koin.core.qualifier.named
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
@@ -37,6 +33,7 @@ fun initMockedDi(vararg module: Module) {
         modules(listOf(mockedAppModule, dataModule, useCaseModule) + module)
     }
 }
+
 
 
 private val mockedAppModule = module {
@@ -301,4 +298,10 @@ val sampleProducts = listOf(
         position = 4,
         subCategoryId = "y3TMDSd3fgZAx494uHWx"
     ),
+)
+
+val sampleWhatsapp = Whatsapp(
+    phoneNumber = "573429544253",
+    message = "Hola, quiero hacer un pedido",
+    image = "https://firebasestorage.googleapis.com/v0/b/el-rosal-177df.appspot.com/o/RosalStorage"
 )

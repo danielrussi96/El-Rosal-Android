@@ -2,7 +2,6 @@ package com.app.elrosal.ui.products
 
 import androidx.paging.PagingData
 import com.app.domain.products.Product
-import com.app.domain.products.Products
 
 interface ProductsUiState {
     object Loading : ProductsUiState

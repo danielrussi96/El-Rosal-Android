@@ -1,8 +1,6 @@
 package com.app.elrosal.ui.common
 
-import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 
 import androidx.compose.ui.platform.LocalContext
 import coil.compose.AsyncImagePainter

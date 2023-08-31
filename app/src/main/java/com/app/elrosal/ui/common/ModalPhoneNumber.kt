@@ -18,7 +18,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CardDefaults.cardColors
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.OutlinedTextField
@@ -43,10 +42,6 @@ import com.app.elrosal.R
 import com.app.elrosal.ui.theme.CATEGORIES_ELEVATION
 import com.app.elrosal.ui.theme.LOGO_MIN_HEIGHT
 import com.app.elrosal.ui.theme.ROUND_CORNERS_8
-import com.app.elrosal.utils.encryptPhoneNumber
-import java.util.Base64
-import javax.crypto.Cipher
-import javax.crypto.spec.SecretKeySpec
 
 
 @Composable

@@ -15,9 +15,7 @@ import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.app.domain.details.RecommendedProduct
-import com.app.domain.products.Product
 import com.app.elrosal.ui.common.AsyncImagePainter
 import com.app.elrosal.ui.common.DescriptionProducts
 import com.app.elrosal.ui.common.TitleProducts

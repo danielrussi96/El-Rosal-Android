@@ -1,12 +1,13 @@
 package com.app.elrosal.ui.main
 
 import com.app.elrosal.MainViewModel
-import com.app.elrosal.initMockedDi
 import com.app.elrosal.testrules.CoroutinesTestRule
 import com.app.elrosal.ui.home.CategoriesUiState
 import com.app.elrosal.ui.home.WhatsappUiState
 import com.app.elrosal.ui.products.DetailProductUiState
 import com.app.elrosal.ui.products.SubCategoriesUiState
+import com.app.testsharedapp.initMockedDi
+import com.app.testsharedapp.sampleWhatsapp
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.toList
