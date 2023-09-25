@@ -2,13 +2,16 @@ package com.app.elrosal.ui.products.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
@@ -32,22 +35,33 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.app.domain.products.Product
 import com.app.elrosal.MainViewModel
+import com.app.elrosal.ui.common.AnimatedShimmer
 import com.app.elrosal.ui.common.AsyncImagePainter
 import com.app.elrosal.ui.products.SubCategoriesUiState
 import com.app.elrosal.ui.theme.CARD_HEIGHT_PRODUCTS
 import com.app.elrosal.ui.theme.CATEGORIES_ELEVATION
+import com.app.elrosal.ui.theme.ElRosalTheme
+import com.app.elrosal.ui.theme.HEIGHT_16
+import com.app.elrosal.ui.theme.HEIGHT_32
+import com.app.elrosal.ui.theme.HEIGHT_40
 
 import com.app.elrosal.ui.theme.IMAGE_HEIGHT_PRODUCTS
+import com.app.elrosal.ui.theme.IMAGE_HEIGHT_SUBCATEGORIES
 import com.app.elrosal.ui.theme.PADDING_16
 import com.app.elrosal.ui.theme.PADDING_8
 import com.app.elrosal.ui.theme.ROUND_CORNERS_16
+import com.app.elrosal.ui.theme.ROUND_CORNERS_8
+import com.app.elrosal.ui.theme.WIDTH_176
+import com.app.elrosal.ui.theme.WIDTH_4
 
 @Composable
 fun ProductsScreen(
@@ -56,7 +70,7 @@ fun ProductsScreen(
     navigateToDetailScreen: (String) -> Unit
 ) {
 
-    LaunchedEffect(key1 = id){
+    LaunchedEffect(key1 = id) {
         mainViewModel.getSubCategories(id = id)
     }
 
@@ -77,7 +91,9 @@ fun ProductsScreen(
 
     when (uiState) {
 
-        is SubCategoriesUiState.Loading -> {}
+        is SubCategoriesUiState.Loading -> {
+            ProductsShimmer()
+        }
 
         is SubCategoriesUiState.Success -> {
             val data = (uiState as SubCategoriesUiState.Success).subCategories
@@ -186,4 +202,90 @@ fun ProductItem(product: Product, navigateToDetailScreen: (String) -> Unit) {
     }
 }
 
+
+@Composable
+fun ProductsShimmer() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        AnimatedShimmer { brush ->
+
+            Spacer(modifier = Modifier.height(HEIGHT_16))
+
+            Spacer(
+                modifier = Modifier
+                    .width(WIDTH_176)
+                    .height(HEIGHT_40)
+                    .clip(RoundedCornerShape(ROUND_CORNERS_8))
+                    .background(brush)
+            )
+
+            Spacer(modifier = Modifier.height(HEIGHT_16))
+
+            LazyRow(horizontalArrangement = Arrangement.spacedBy(PADDING_16)) {
+
+                item {
+                    Spacer(modifier = Modifier.width(WIDTH_4))
+                }
+
+                items(4) {
+                    Spacer(
+                        modifier = Modifier
+                            .width(IMAGE_HEIGHT_SUBCATEGORIES)
+                            .height(IMAGE_HEIGHT_SUBCATEGORIES)
+                            .clip(RoundedCornerShape(ROUND_CORNERS_8))
+                            .background(brush)
+                    )
+                }
+
+                item {
+                    Spacer(modifier = Modifier.width(WIDTH_4))
+                }
+            }
+
+            Spacer(modifier = Modifier.height(HEIGHT_16))
+
+            Box(modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = PADDING_16)) {
+                Spacer(
+                    modifier = Modifier
+                        .width(WIDTH_176)
+                        .height(HEIGHT_32)
+                        .clip(RoundedCornerShape(ROUND_CORNERS_8))
+                        .background(brush)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(HEIGHT_16))
+
+            LazyVerticalGrid(
+                modifier = Modifier.padding(horizontal = PADDING_16),
+                horizontalArrangement = Arrangement.spacedBy(PADDING_16),
+                verticalArrangement = Arrangement.spacedBy(PADDING_16),
+                columns = GridCells.Fixed(COUNT_GRID_COLUMNS_2),
+                content = {
+                    items(8) {
+                        Spacer(
+                            modifier = Modifier
+                                .width(CARD_HEIGHT_PRODUCTS)
+                                .height(CARD_HEIGHT_PRODUCTS)
+                                .clip(RoundedCornerShape(ROUND_CORNERS_8))
+                                .background(brush)
+                        )
+                    }
+                })
+        }
+    }
+}
+
+@Composable
+@Preview(showBackground = true, showSystemUi = true)
+fun ProductsShimmerPreview() {
+    ElRosalTheme {
+        ProductsShimmer()
+    }
+}
 

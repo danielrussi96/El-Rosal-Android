@@ -36,7 +36,7 @@ dependencies {
 
     implementation(project(":app"))
     implementation(libs.bundles.shared.repository)
-    implementation ("io.insert-koin:koin-test:3.3.3")
-    implementation ("io.insert-koin:koin-test-junit4:3.3.3")
+    implementation (libs.koin.test)
+    implementation (libs.koin.test.junit4)
     implementation(libs.coroutines)
 }

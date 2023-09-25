@@ -9,12 +9,17 @@ import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -34,27 +39,45 @@ import com.app.elrosal.ui.theme.CATEGORIES_ELEVATION
 import com.app.elrosal.ui.theme.IMAGE_HEIGHT_PRODUCT_DETAIL
 import com.app.elrosal.ui.theme.PADDING_16
 import com.app.elrosal.ui.theme.PADDING_24
-import com.app.elrosal.ui.theme.PADDING_96
 import com.app.elrosal.ui.theme.ROUND_CORNERS_16
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CardDefaults.cardColors
 import androidx.compose.material3.CardDefaults.cardElevation
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.produceState
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import com.app.domain.details.DetailProduct
 import com.app.elrosal.MainViewModel
 import com.app.elrosal.R
+import com.app.elrosal.ui.common.AnimatedShimmer
 import com.app.elrosal.ui.common.AsyncImagePainter
 import com.app.elrosal.ui.common.SubTitleContent
 import com.app.elrosal.ui.products.DetailProductUiState
+import com.app.elrosal.ui.theme.CARD_HEIGHT_PRODUCTS
+import com.app.elrosal.ui.theme.HEIGHT_16
+import com.app.elrosal.ui.theme.HEIGHT_160
+import com.app.elrosal.ui.theme.HEIGHT_32
+import com.app.elrosal.ui.theme.HEIGHT_40
+import com.app.elrosal.ui.theme.IMAGE_HEIGHT_SUBCATEGORIES
+import com.app.elrosal.ui.theme.PADDING_64
 import com.app.elrosal.ui.theme.PADDING_8
+import com.app.elrosal.ui.theme.ROUND_CORNERS_8
+import com.app.elrosal.ui.theme.WIDTH_176
+import com.app.elrosal.ui.theme.WIDTH_192
+import com.app.elrosal.ui.theme.WIDTH_4
+import com.app.elrosal.utils.ConstantsViews
 import com.app.elrosal.utils.ConstantsViews.DELAY_5000
+import kotlinx.coroutines.launch
 
 
 @Composable
@@ -65,6 +88,10 @@ fun ProductDetailScreen(mainViewModel: MainViewModel, id: String) {
     }
 
     val lifecycle = LocalLifecycleOwner.current.lifecycle
+
+    val coroutineScope = rememberCoroutineScope()
+
+    val listState = rememberLazyListState()
 
     val uiState by produceState<DetailProductUiState>(
         initialValue = DetailProductUiState.Loading,
@@ -80,7 +107,7 @@ fun ProductDetailScreen(mainViewModel: MainViewModel, id: String) {
 
     when (uiState) {
         is DetailProductUiState.Loading -> {
-
+            ProductDetailShimmer()
         }
 
         is DetailProductUiState.Success -> {
@@ -89,6 +116,7 @@ fun ProductDetailScreen(mainViewModel: MainViewModel, id: String) {
                 modifier = Modifier
                     .fillMaxSize()
                     .background(colorScheme.background),
+                state = listState,
                 content = {
                     item {
                         TitleContent(
@@ -112,7 +140,11 @@ fun ProductDetailScreen(mainViewModel: MainViewModel, id: String) {
                             recommendedProducts = product,
                             navigateToDetailScreen = { id ->
                                 mainViewModel.getDetailProduct(id = id)
-                            })
+                                coroutineScope.launch {
+                                    listState.animateScrollToItem(0)
+                                }
+                            }
+                        )
                     }
                 })
         }
@@ -140,7 +172,7 @@ fun ProductDetailContent(detailProduct: DetailProduct) {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = PADDING_96)
+                .padding(top = PADDING_64)
                 .height(CARD_HEIGHT_PRODUCT_DETAIL),
             colors = cardColors(
                 containerColor = colorScheme.surface
@@ -154,9 +186,10 @@ fun ProductDetailContent(detailProduct: DetailProduct) {
                 verticalArrangement = Arrangement.Bottom,
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
+                Spacer(modifier = Modifier.height(PADDING_16))
                 TitleProducts(titleProducts = detailProduct.name)
                 DescriptionProducts(
-                    modifier = Modifier.padding(PADDING_16),
+                    modifier = Modifier.padding(bottom = PADDING_16),
                     descriptionProducts = detailProduct.description
                 )
             }
@@ -181,10 +214,10 @@ fun ProductDetailContent(detailProduct: DetailProduct) {
                 }
         }
 
-
         HorizontalPager(
-            modifier = Modifier
-                .fillMaxWidth(), state = pagerState
+            modifier = Modifier.fillMaxSize(),
+            verticalAlignment = Alignment.CenterVertically,
+            state = pagerState
         ) { index ->
 
             val pageOffset =
@@ -202,12 +235,13 @@ fun ProductDetailContent(detailProduct: DetailProduct) {
                     painter = painter,
                     contentDescription = detailProduct.details[index].title,
                     modifier = Modifier
-                        .width(IMAGE_HEIGHT_PRODUCT_DETAIL)
+                        .fillMaxWidth()
                         .height(IMAGE_HEIGHT_PRODUCT_DETAIL)
                         .graphicsLayer {
                             scaleX = imageSize
                             scaleY = imageSize
                         }
+                        .offset(y = (-24).dp)
                 )
             }
         }
@@ -216,3 +250,72 @@ fun ProductDetailContent(detailProduct: DetailProduct) {
 }
 
 
+
+@Composable
+fun ProductDetailShimmer() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        AnimatedShimmer { brush ->
+
+            Spacer(modifier = Modifier.height(HEIGHT_16))
+
+            Spacer(
+                modifier = Modifier
+                    .width(WIDTH_176)
+                    .height(HEIGHT_40)
+                    .clip(RoundedCornerShape(ROUND_CORNERS_8))
+                    .background(brush)
+            )
+
+            Spacer(modifier = Modifier.height(HEIGHT_16))
+
+            Spacer(
+                modifier = Modifier
+                    .width(CARD_HEIGHT_PRODUCT_DETAIL)
+                    .height(CARD_HEIGHT_PRODUCT_DETAIL)
+                    .clip(RoundedCornerShape(ROUND_CORNERS_8))
+                    .background(brush)
+            )
+
+            Spacer(modifier = Modifier.height(HEIGHT_16))
+
+            Box(modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = PADDING_16)) {
+                Spacer(
+                    modifier = Modifier
+                        .width(WIDTH_192)
+                        .height(HEIGHT_32)
+                        .clip(RoundedCornerShape(ROUND_CORNERS_8))
+                        .background(brush)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(HEIGHT_16))
+
+            LazyColumn(
+                modifier = Modifier.padding(horizontal = PADDING_16),
+                verticalArrangement = Arrangement.spacedBy(PADDING_16),
+                content = {
+                    items(8) {
+                        Spacer(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(HEIGHT_160)
+                                .clip(RoundedCornerShape(ROUND_CORNERS_8))
+                                .background(brush)
+                        )
+                    }
+                })
+        }
+    }
+}
+
+@Composable
+@Preview
+fun ProductDetailShimmerPreview() {
+    ProductDetailShimmer()
+}

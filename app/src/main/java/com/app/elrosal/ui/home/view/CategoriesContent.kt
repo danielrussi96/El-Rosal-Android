@@ -53,52 +53,58 @@ fun CategoriesContent(
         }
 
         is CategoriesUiState.Loading -> {
-            LazyVerticalGrid(
-                modifier = Modifier.fillMaxSize(),
-                columns = GridCells.Fixed(COUNT_GRID_COLUMNS_2),
-                content = {
-                    item(span = {
-                        GridItemSpan(COUNT_GRID_COLUMNS_2)
-                    }) {
-                        SubTitleContent(
-                            modifier = Modifier.padding(PADDING_16),
-                            subTitle = stringResource(id = R.string.categories_label)
-                        )
-                    }
-                    items(12) {
-                        CategoriesItemShimmer()
-                    }
-                })
+            CategoriesLoading()
         }
 
         is CategoriesUiState.Success -> {
             val data = (uiState as CategoriesUiState.Success).categories ?: emptyList()
-            LazyVerticalGrid(
-                modifier = Modifier.fillMaxSize().testTag("categories_content"),
-                columns = GridCells.Fixed(COUNT_GRID_COLUMNS_2),
-                content = {
-                    item(span = {
-                        GridItemSpan(COUNT_GRID_COLUMNS_2)
-                    }) {
-                        SubTitleContent(
-                            modifier = Modifier.padding(PADDING_16),
-                            subTitle = stringResource(id = R.string.categories_label)
-                        )
-                    }
-                    items(data, key = { item ->
-                        item.id
-                    }) { category ->
-                        CategoriesItem(
-                            category = category,
-                            modifier = Modifier
-                                .width(IMAGE_HEIGHT_CATEGORIES)
-                                .height(IMAGE_HEIGHT_CATEGORIES),
-                            navigateToProductScreen = navigateToProductScreen
-                        )
-                    }
-                })
+            if (data.isNotEmpty()){
+                LazyVerticalGrid(
+                    modifier = Modifier.fillMaxSize().testTag("categories_content"),
+                    columns = GridCells.Fixed(COUNT_GRID_COLUMNS_2),
+                    content = {
+                        item(span = {
+                            GridItemSpan(COUNT_GRID_COLUMNS_2)
+                        }) {
+                            SubTitleContent(
+                                modifier = Modifier.padding(PADDING_16),
+                                subTitle = stringResource(id = R.string.categories_label)
+                            )
+                        }
+                        items(data, key = { item ->
+                            item.id
+                        }) { category ->
+                            CategoriesItem(
+                                category = category,
+                                modifier = Modifier
+                                    .width(IMAGE_HEIGHT_CATEGORIES)
+                                    .height(IMAGE_HEIGHT_CATEGORIES),
+                                navigateToProductScreen = navigateToProductScreen
+                            )
+                        }
+                    })
+            } else CategoriesLoading()
+
         }
     }
 }
 
-
+@Composable
+fun CategoriesLoading(){
+    LazyVerticalGrid(
+        modifier = Modifier.fillMaxSize(),
+        columns = GridCells.Fixed(COUNT_GRID_COLUMNS_2),
+        content = {
+            item(span = {
+                GridItemSpan(COUNT_GRID_COLUMNS_2)
+            }) {
+                SubTitleContent(
+                    modifier = Modifier.padding(PADDING_16),
+                    subTitle = stringResource(id = R.string.categories_label)
+                )
+            }
+            items(12) {
+                CategoriesItemShimmer()
+            }
+        })
+}

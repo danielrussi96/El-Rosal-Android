@@ -1,5 +1,6 @@
 package com.app.elrosal.navigation
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
@@ -9,6 +10,8 @@ import com.app.elrosal.model.Routes
 import com.app.elrosal.navigation.destinations.detailComposable
 import com.app.elrosal.navigation.destinations.homeComposable
 import com.app.elrosal.navigation.destinations.productsComposable
+import com.google.accompanist.navigation.animation.AnimatedNavHost
+
 
 @Composable
 fun SetupNavigation(

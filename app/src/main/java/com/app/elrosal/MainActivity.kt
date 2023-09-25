@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,6 +21,7 @@ import androidx.navigation.compose.rememberNavController
 import com.app.elrosal.navigation.SetupNavigation
 import com.app.elrosal.ui.common.permission.PermissionRequester
 import com.app.elrosal.ui.theme.ElRosalTheme
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
 
 class MainActivity : ComponentActivity() {
@@ -29,6 +31,7 @@ class MainActivity : ComponentActivity() {
 
     private lateinit var mainState: MainState
 
+    @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

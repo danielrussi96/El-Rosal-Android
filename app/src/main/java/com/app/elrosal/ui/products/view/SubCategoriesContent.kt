@@ -17,6 +17,7 @@ import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -38,10 +39,9 @@ fun SubCategoriesContent(
     onSubCategorySelected: (Category) -> Unit
 ) {
 
-    val itemSelection = remember { mutableStateOf(0) }
+    val itemSelection = remember { mutableIntStateOf(0) }
 
     LaunchedEffect(Unit) {
-        Log.d("SubCategoriesContent", "subCategories: $subCategories")
         if (subCategories.isNotEmpty()) {
             onSubCategorySelected(subCategories[0])
         }
