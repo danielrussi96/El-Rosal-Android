@@ -58,6 +58,7 @@ import com.app.elrosal.ui.theme.ICON_SIZE_40
 import com.app.elrosal.ui.theme.LOGO_HEIGHT
 import com.app.elrosal.ui.theme.PADDING_16
 import com.app.elrosal.ui.theme.ROUND_CORNERS_8
+import com.app.elrosal.utils.Constants.IMAGE_PRESENTATION
 import com.app.elrosal.utils.ConstantsViews.WEIGHT_1F
 import com.app.elrosal.utils.decryptedData
 
@@ -124,8 +125,8 @@ fun CategoriesList(
     var showDialog by rememberSaveable { mutableStateOf(false) }
     val whatsapp = Whatsapp(
         phoneNumber = "",
-        message = "Hola, quisiera hacer un pedido",
-        image = "https://firebasestorage.googleapis.com/v0/b/el-rosal-177df.appspot.com/o/4d79b1e26a5e605135c3326d7465904d.jpg?alt=media&token=0c257f76-cdd9-4961-9e69-cc83060a81c9"
+        message = stringResource(id = R.string.message_sent),
+        image = IMAGE_PRESENTATION
     )
     Column(
         modifier = Modifier
