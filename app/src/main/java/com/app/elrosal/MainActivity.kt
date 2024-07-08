@@ -31,7 +31,6 @@ class MainActivity : ComponentActivity() {
 
     private lateinit var mainState: MainState
 
-    @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

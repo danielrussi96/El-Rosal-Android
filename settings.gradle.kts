@@ -16,7 +16,7 @@ dependencyResolutionManagement {
             name = "com.el.rosal.business"
             credentials {
                 username = "danielrussi96"
-                password = "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"
+                password = "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"
             }
         }
 

@@ -1,10 +1,10 @@
 [versions]
-activity-compose = "1.7.2"
-agp = "8.3.0-alpha03"
+activity-compose = "1.8.0"
+agp = "8.4.1"
 androidx-test-ext-junit = "1.1.5"
 coil-version = "2.4.0"
-compose-bom = "2023.09.01"
-compose-test = "1.5.1"
+compose-bom = "2023.10.00"
+compose-test = "1.5.4"
 compose-animation = "0.33.1-alpha"
 core-ktx = "1.12.0"
 espresso-core = "3.5.1"
@@ -18,9 +18,9 @@ lottie = "6.1.0"
 mockito = "5.1.0"
 mockito-inline = "5.2.0"
 mockwebserver = "4.11.0"
-navigation-compose = "2.7.3"
+navigation-compose = "2.7.4"
 paging-compose = "3.2.1"
-shared-repository = "1.5.8"
+shared-repository = "1.6.5"
 splashscreen = "1.0.1"
 turbine = "1.0.0"
 
@@ -49,7 +49,7 @@ lifecycle-viewmode = { group = "androidx.lifecycle", name = "lifecycle-viewmodel
 lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata", version.ref = "lifecycle-runtime-ktx" }
 lottie = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottie" }
 material3 = { group = "androidx.compose.material3", name = "material3" }
-mockito = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockito" }
+    mockito = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockito" }
 mockito-inline = { group = "org.mockito", name = "mockito-inline", version.ref = "mockito-inline" }
 mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "mockwebserver" }
 navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation-compose" }
